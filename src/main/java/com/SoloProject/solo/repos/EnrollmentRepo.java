@@ -4,7 +4,8 @@ import com.SoloProject.solo.models.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
+import java.util.List;
 
 public interface EnrollmentRepo extends JpaRepository<Enrollment, UUID> {
-    Enrollment findByMemberId(UUID memberId);
+    List<Enrollment> findByMemberId(UUID memberId);
 }

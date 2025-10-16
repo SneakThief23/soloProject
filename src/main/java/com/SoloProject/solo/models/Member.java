@@ -16,7 +16,7 @@ public class Member {
     @Id
     @GeneratedValue
     private UUID id;
-    private UUID userId;           // FK -> User
+    private UUID memberId;           // FK -> User
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -27,9 +27,9 @@ public class Member {
 
     public Member() {}
 
-    public Member(UUID id, UUID userId, String firstName, String lastName, LocalDate dateOfBirth, String email, List<Enrollment> enrollments, String phone, Address mailingAddress) {
+    public Member(UUID id, UUID memberId, String firstName, String lastName, LocalDate dateOfBirth, String email, List<Enrollment> enrollments, String phone, Address mailingAddress) {
         this.id = id;
-        this.userId = userId;
+        this.memberId = memberId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -48,12 +48,12 @@ public class Member {
         this.id = id;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public UUID getMemberId() {
+        return memberId;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setMemberId(UUID memberId) {
+        this.memberId = memberId;
     }
 
     public String getFirstName() {

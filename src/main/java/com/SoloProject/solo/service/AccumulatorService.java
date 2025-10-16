@@ -20,10 +20,10 @@ public class AccumulatorService {
     // Update existing Accumulator
 public Optional<Accumulator> updateAccumulator(UUID id, Accumulator newData){
         return accumulatorRepo.findById(id).map(existing -> {
-            existing.setAccumulatorType(newData.getAccumulatorType());
-            existing.setNetworkTier(newData.getNetworkTier());
-            existing.setLimitAmount(newData.getLimitAmount());
-            existing.setUsedAmount(newData.getUsedAmount());
+            if (newData.getAccumulatorType () != null)existing.setAccumulatorType(newData.getAccumulatorType());
+            if (newData.getNetworkTier () != null)existing.setNetworkTier(newData.getNetworkTier());
+            if (newData.getLimitAmount () != null)existing.setLimitAmount(newData.getLimitAmount());
+            if (newData.getUsedAmount () != null)existing.setUsedAmount(newData.getUsedAmount());
             return accumulatorRepo.save(existing);
         });
     }
@@ -36,7 +36,7 @@ public Optional<Accumulator> updateAccumulator(UUID id, Accumulator newData){
     public List<Accumulator> getAllAccumulator() {
         return accumulatorRepo.findAll();
     }
-    //Delete an accumulator
+    //Delete an accumulator by id
     public boolean deleteAccumulator(UUID id) {
         if (accumulatorRepo.existsById(id)) {
             accumulatorRepo.deleteById(id);

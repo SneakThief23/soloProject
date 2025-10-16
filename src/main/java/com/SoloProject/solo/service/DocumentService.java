@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 @Service
 public class DocumentService {
@@ -14,17 +15,38 @@ public class DocumentService {
     public DocumentService(DocumentRepo documentRepo) {
         this.documentRepo = documentRepo;
     }
+
+    public List<Document> getAllDocument() {
+        return documentRepo.findAll();
+    }
+
+    public List<Document> getDocumentByMemberId(UUID memberId) {
+        return documentRepo.findByMemberId(memberId);
+    }
+
+    public Document createDocument(Document document){
+        return documentRepo.save(document);
+    }
+
     // Update existing Document
     public Optional<Document> updateDocument(UUID id, Document newData) {
         return documentRepo.findById(id).map(existing -> {
-            existing.setId(newData.getMemberId());
-            existing.setFileName(newData.getFileName());
-            existing.setMimeType(newData.getMimeType());
-            existing.setMemberId(newData.getMemberId());
-            existing.setClaimId(newData.getClaimId());
-            existing.setUploadedAt((newData.getUploadedAt()));
+            if (newData.getMemberId () != null)existing.setId(newData.getMemberId());
+            if (newData.getFileName () != null)existing.setFileName(newData.getFileName());
+            if (newData.getMimeType () != null)existing.setMimeType(newData.getMimeType());
+            if (newData.getMemberId () != null)existing.setMemberId(newData.getMemberId());
+            if (newData.getClaimId () != null)existing.setClaimId(newData.getClaimId());
+            if (newData.getUploadedAt () != null)existing.setUploadedAt((newData.getUploadedAt()));
             return documentRepo.save(existing);
         });
+    }
+
+    public boolean deleteDocument(UUID id) {
+        if(documentRepo.existsById(id)) {
+            documentRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
 

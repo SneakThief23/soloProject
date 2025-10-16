@@ -2,6 +2,7 @@ package com.SoloProject.solo.controllers;
 
 import com.SoloProject.solo.models.Accumulator;
 import com.SoloProject.solo.service.AccumulatorService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,12 +30,16 @@ public class AccumulatorController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Accumulator> updateAccumulator(@PathVariable UUID id, @RequestBody Accumulator accumulator) {
-        return accumulatorService.updateAccumulator(id, accumulator);
+    public ResponseEntity<Accumulator> updateAccumulator(@PathVariable UUID id, @RequestBody Accumulator data) {
+        Optional<Accumulator> updated = accumulatorService.updateAccumulator(id, data);
+        return updated
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public String deleteAccumulator(@PathVariable UUID id) {
-        return accumulatorService.deleteAccumulator(id) ? "Deleted" : "Not Found";
+    public ResponseEntity<Void> deleteAccumulator(@PathVariable UUID id) {
+        boolean deleted = accumulatorService.deleteAccumulator(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }
