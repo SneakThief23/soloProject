@@ -2,7 +2,6 @@ package com.SoloProject.solo.controllers;
 
 import com.SoloProject.solo.models.Enrollment;
 import com.SoloProject.solo.service.EnrollmentService;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

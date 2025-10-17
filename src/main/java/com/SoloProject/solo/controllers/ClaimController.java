@@ -4,8 +4,7 @@ import com.SoloProject.solo.models.Claim;
 import com.SoloProject.solo.service.ClaimService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.jwt.Jwt;
+
 
 import java.util.List;
 import java.util.Optional;

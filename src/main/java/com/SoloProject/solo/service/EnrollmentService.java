@@ -1,8 +1,6 @@
 package com.SoloProject.solo.service;
 
-import com.SoloProject.solo.models.Claim;
 import com.SoloProject.solo.models.Enrollment;
-import com.SoloProject.solo.repos.ClaimRepo;
 import com.SoloProject.solo.repos.EnrollmentRepo;
 import org.springframework.stereotype.Service;
 
