@@ -1,6 +1,7 @@
 package com.SoloProject.solo.service;
 
 import com.SoloProject.solo.models.Member;
+import com.SoloProject.solo.models.Address;
 import com.SoloProject.solo.repos.MemberRepo;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,39 @@ public class MemberService {
 
     public List<Member> getAllMember() {
         return memberRepo.findAll();
+    }
+
+    // Update member address
+    public Optional<Member> updateMemberAddress(UUID memberId, Address newAddress) {
+        return memberRepo.findById(memberId).map(member -> {
+            Address existing = member.getMailingAddress();
+
+            // If member has no address create new one
+            if (existing == null) {
+                member.setMailingAddress(newAddress);
+            } else {
+                // Update existing address fields
+                if (newAddress.getLine1() != null) existing.setLine1(newAddress.getLine1());
+                if (newAddress.getLine2() != null) existing.setLine2(newAddress.getLine2());
+                if (newAddress.getCity() != null) existing.setCity(newAddress.getCity());
+                if (newAddress.getState() != null) existing.setState(newAddress.getState());
+                if (newAddress.getPostalCode() != null) existing.setPostalCode(newAddress.getPostalCode());
+            }
+
+            return memberRepo.save(member);
+        });
+    }
+
+    // Get member
+    public Optional<Member> getMemberById(UUID memberId) {
+        return memberRepo.findById(memberId);
+    }
+
+    // Delete member's address
+    public Optional<Member> deleteMemberAddress(UUID memberId) {
+        return memberRepo.findById(memberId).map(member -> {
+            member.setMailingAddress(null);
+            return memberRepo.save(member);
+        });
     }
 }

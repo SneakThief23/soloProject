@@ -14,13 +14,15 @@ public class Provider {
     @Id
     @GeneratedValue
     UUID id;
+    UUID memberId;
     String name;
     String specialty;
     Address address;
     String phone;
 
-    public Provider(UUID id, String name, String specialty, Address address, String phone) {
+    public Provider(UUID id, UUID memberId, String name, String specialty, Address address, String phone) {
         this.id = id;
+        this.memberId = memberId;
         this.name = name;
         this.specialty = specialty;
         this.address = address;
@@ -65,5 +67,13 @@ public class Provider {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public UUID getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(UUID memberId) {
+        this.memberId = memberId;
     }
 }

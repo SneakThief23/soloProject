@@ -19,6 +19,10 @@ public class Plan {
     private String networkName;  // e.g., "Prime"
     private Integer planYear;    // e.g., 2025
 
+    @ManyToOne
+    @JoinColumn(name = "memberId")
+    private Member member;
+
     public Plan() {}
 
     public Plan(UUID id, String name, String planType, String networkName, Integer planYear) {
@@ -63,6 +67,14 @@ public class Plan {
 
     public Integer getPlanYear() {
         return planYear;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public void setPlanYear(Integer planYear) {

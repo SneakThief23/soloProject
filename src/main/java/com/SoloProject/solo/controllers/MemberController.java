@@ -1,5 +1,6 @@
 package com.SoloProject.solo.controllers;
 
+import com.SoloProject.solo.models.Address;
 import com.SoloProject.solo.models.Member;
 import com.SoloProject.solo.service.MemberService;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,31 @@ public class MemberController {
         Optional<Member> updated = memberService.updateMember(id, member);
         return updated
                 .map(acc -> ResponseEntity.ok(acc))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Update a member address
+    @PutMapping("/{memberId}/address")
+    public ResponseEntity<Member> updateAddress(
+            @PathVariable UUID memberId,
+            @RequestBody Address address) {
+        return memberService.updateMemberAddress(memberId, address)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    // Get member with their address
+    @GetMapping("/{memberId}")
+    public ResponseEntity<Member> getMember(@PathVariable UUID memberId) {
+        return memberService.getMemberById(memberId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Delete member address
+    @DeleteMapping("/{memberId}/address")
+    public ResponseEntity<Member> deleteAddress(@PathVariable UUID memberId) {
+        return memberService.deleteMemberAddress(memberId)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
     @DeleteMapping("/{id}")

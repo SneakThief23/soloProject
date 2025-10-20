@@ -22,7 +22,11 @@ public class Member {
     private LocalDate dateOfBirth;
     private String email;          // optional profile display
     private String phone;          // optional profile display
+
+    @Embedded
     private Address mailingAddress; // optional embedded/owned
+
+    @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL)
     private List<Enrollment> enrollments; // one active for current plan year
 
     public Member() {}

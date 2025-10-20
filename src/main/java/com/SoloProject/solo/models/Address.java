@@ -6,12 +6,12 @@ import jakarta.persistence.Table;
 @Embeddable
 @Table(name = "address")
 public class Address {
+
     protected String line1;
     protected String line2;
     protected String city;
     protected String state;
     protected String postalCode;
-
     public Address() {}
 
     public Address(String line1, String line2, String city, String state, String postalCode){

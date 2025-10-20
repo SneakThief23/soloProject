@@ -31,12 +31,11 @@ public class EnrollmentService {
     // Update existing Enrolment
     public Optional<Enrollment> updateEnrollment(UUID id, Enrollment newData) {
         return enrollmentRepo.findById(id).map(existing -> {
-            if (newData.getMemberId () != null)existing.setMemberId(newData.getMemberId());
             if (newData.getPlanId () != null)existing.setPlanId(newData.getPlanId());
             if (newData.getCoverageEnd () != null)existing.setCoverageEnd(newData.getCoverageEnd());
             if (newData.getCoverageStart () != null)existing.setCoverageStart(newData.getCoverageStart());
             if (newData.getActive () != null)existing.setActive(newData.getActive());
-            if (newData.getAccumulators () != null)existing.setAccumulators((newData.getAccumulators()));
+            if (newData.getAccumulators() != null)existing.setAccumulators((newData.getAccumulators()));
             return enrollmentRepo.save(existing);
         });
     }

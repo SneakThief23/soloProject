@@ -8,11 +8,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="{baseUrl}/oauth2/callback" element = {<GoogleCallback />} />
         <Route path = "/" element={<LoginPage />} />
-        <Route path = "/dashboard" element = {<Dashboard />} />
-        <Route path = "/claims" element = {<ClaimsPage />} />
-        <Route path = "claimdetail" element = {<ClaimDetail />} />
+        <Route path = "/dashboard" element = {<ProtectedRoute> {<Dashboard />} </ProtectedRoute> } />
+        <Route path = "/claims" element = {<ProtectedRoute> {<ClaimsPage />} </ProtectedRoute> } />
+        <Route path = "claimdetail" element = {<ProtectedRoute> {<ClaimDetail />} </ProtectedRoute> } />
       </Routes>
     </Router>
   );

@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user",
+@Table(name = "users",
 uniqueConstraints = @UniqueConstraint(columnNames = {"authProvider", "authSub"}))
 public class User {
 

@@ -14,4 +14,9 @@ public class Oauth2Controller {
 
     @Value("${jwt.secret}")
     private String jwtSecret;
+
+    @GetMapping("/test-jwt")
+    public String testJwt() {
+        return "JWT Secret: " + (jwtSecret != null ? "Yes" : "No");
+    }
 }
