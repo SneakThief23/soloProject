@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-const Dashboard: React.FC = () => {
+export default function Dashboard() {
     const [message, setMessage] = useState("Loading...");
 
     useEffect(() => {
@@ -22,5 +22,3 @@ const Dashboard: React.FC = () => {
         </div>
     );
 };
-
-export default Dashboard;

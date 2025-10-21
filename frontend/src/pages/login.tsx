@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,17 +18,17 @@ const Login: React.FC = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/google";
     };
 
-  return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-8">Woo</h1>
-      <button
-        onClick={handleGoogleLogin}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg text-lg font-semibold"
-      >
-        Sign in with Google
-      </button>
-    </div>
-  );
+    return (
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+            <h1 className="text-3xl font-bold mb-8">Woo</h1>
+            <button
+                onClick={handleGoogleLogin}
+                className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg text-lg font-semibold"
+            >
+                Sign in with Google
+            </button>
+        </div>
+    );
 };
 
-export default Login;
+export default LoginPage;

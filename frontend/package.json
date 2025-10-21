@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "vite preview",
     "build": "vite build",
-    "test": "react-scripts test",
+    "test": "vitetest",
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview"
