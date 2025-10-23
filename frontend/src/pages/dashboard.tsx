@@ -17,7 +17,7 @@ export default function Dashboard({showAll}: DashboardProps) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-900 text-gray-400">
+      <div className="flex items-center justify-center h-screen bg-cyan-900 text-gray-400">
         Loading dashboard...
       </div>
     );
@@ -32,10 +32,10 @@ export default function Dashboard({showAll}: DashboardProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-10">
+    <div className="min-h-screen bg-black text-white p-10">
       {/* Header */}
       <header className="mb-10 text-center">
-        <h1 className="text-4xl font-bold">Welcome back {user?.firstname} {user?.lastname}.</h1>
+        <h1 className="text-4xl font-bold">Welcome back {user?.firstName} {user?.lastName}.</h1>
         <p className="text-gray-400 mt-2">{user?.email}</p>
       </header>
 
@@ -44,7 +44,7 @@ export default function Dashboard({showAll}: DashboardProps) {
         {/* User Info Card */}
         <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
           <h2 className="text-xl font-semibold mb-3 border-b border-gray-700 pb-2">Profile Info</h2>
-          <p><strong>Name:</strong> {user?.firstname} {user?.lastname}</p>
+          <p><strong>Name:</strong> {user?.firstName} {user?.lastName}</p>
           <p><strong>Email:</strong> {user?.email}</p>
         </div>
 

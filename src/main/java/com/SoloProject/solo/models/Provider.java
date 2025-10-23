@@ -20,6 +20,8 @@ public class Provider {
     Address address;
     String phone;
 
+    public Provider () {}
+
     public Provider(UUID id, UUID memberId, String name, String specialty, Address address, String phone) {
         this.id = id;
         this.memberId = memberId;

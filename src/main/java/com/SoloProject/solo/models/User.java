@@ -27,10 +27,11 @@ public class User {
 
     private String firstName;
     private String lastName;
+    private String googleId;
 
     public User() {}
 
-    public User(String authProvider, String authSub, String email, OffsetDateTime createdAt, OffsetDateTime updatedAt, String firstName, String lastName) {
+    public User(String authProvider, String authSub, String email, OffsetDateTime createdAt, OffsetDateTime updatedAt, String firstName, String lastName, String googleId) {
         this.authProvider = authProvider;
         this.authSub = authSub;
         this.email = email;
@@ -97,4 +98,11 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public void setId(UUID uuid) {
+    }
+
+    public String getGoogleId() {return googleId;}
+
+    public void setGoogleId(String googleId) {this.googleId = googleId;}
 }
