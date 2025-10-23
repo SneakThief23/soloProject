@@ -3,7 +3,9 @@ package com.SoloProject.solo.service;
 import com.SoloProject.solo.models.Claim;
 import com.SoloProject.solo.models.ClaimLine;
 import com.SoloProject.solo.models.ClaimStatusEvent;
+import com.SoloProject.solo.models.User;
 import com.SoloProject.solo.repos.ClaimRepo;
+import com.SoloProject.solo.repos.UserRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,9 +16,11 @@ import java.util.List;
 public class ClaimService {
 
     private final ClaimRepo claimRepo;
+    private final UserRepo userRepo;
 
-    public ClaimService(ClaimRepo claimRepo) {
+    public ClaimService(ClaimRepo claimRepo, UserRepo userRepo) {
         this.claimRepo = claimRepo;
+        this.userRepo = userRepo;
     }
 
     public List<Claim> getAllClaim() {
@@ -25,6 +29,15 @@ public class ClaimService {
 
     public List<Claim> getClaimByMemberId(UUID memberId) {
         return claimRepo.findByMemberId(memberId);
+    }
+
+    public List<Claim> getClaimsForUser(String email) {
+        Optional<User> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found: " + email);
+        }
+        User user = userOpt.get();
+        return claimRepo.findByMemberId(user.getId());
     }
 
     public Claim createClaim(Claim claim) {

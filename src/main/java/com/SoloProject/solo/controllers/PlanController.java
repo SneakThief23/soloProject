@@ -3,12 +3,16 @@ package com.SoloProject.solo.controllers;
 import com.SoloProject.solo.models.Plan;
 import com.SoloProject.solo.service.PlanService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@RestController
+@RequestMapping("/api/plans")
 public class PlanController {
 
     private final PlanService planService;
@@ -18,13 +22,19 @@ public class PlanController {
     }
 
     @GetMapping
-    public List<Plan> getAllPlan(UUID id) {
+    public List<Plan> getAllPlans(UUID id) {
         return planService.getAllPlan();
     }
 
     @GetMapping("/user/{id}")
-    public List<Plan> getPlanByUser(@PathVariable("id") UUID id) {
+    public List<Plan> getPlansByUser(@PathVariable("id") UUID id) {
         return planService.getPlanByMemberId(id);
+    }
+
+    @GetMapping("/user/me")
+    public ResponseEntity<List<Plan>> getPlansForCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        List<Plan> plans = planService.getPlansForUser(userDetails.getUsername());
+        return ResponseEntity.ok(plans);
     }
 
     @PostMapping

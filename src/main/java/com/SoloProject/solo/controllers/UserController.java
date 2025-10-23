@@ -3,6 +3,8 @@ package com.SoloProject.solo.controllers;
 import com.SoloProject.solo.models.User;
 import com.SoloProject.solo.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,6 +26,16 @@ public class UserController {
     public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
         return userService.findByEmail(email)
                 .map(ResponseEntity::ok)
+                .orElse((ResponseEntity.notFound().build()));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(401).build();
+        }
+        Optional<User> userOpt = userService.findByEmail((userDetails.getUsername()));
+        return userOpt.map(ResponseEntity::ok)
                 .orElse((ResponseEntity.notFound().build()));
     }
 

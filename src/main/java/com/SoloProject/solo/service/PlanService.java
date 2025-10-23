@@ -1,7 +1,9 @@
 package com.SoloProject.solo.service;
 
 import com.SoloProject.solo.models.Plan;
+import com.SoloProject.solo.models.User;
 import com.SoloProject.solo.repos.PlanRepo;
+import com.SoloProject.solo.repos.UserRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +13,11 @@ import java.util.UUID;
 @Service
 public class PlanService {
     private final PlanRepo planRepo;
+    private final UserRepo userRepo;
 
-    public PlanService(PlanRepo planRepo) {
+    public PlanService(PlanRepo planRepo, UserRepo userRepo) {
         this.planRepo = planRepo;
+        this.userRepo = userRepo;
     }
 
     public List<Plan> getAllPlan() {
@@ -26,6 +30,15 @@ public class PlanService {
 
     public Plan createPlan(Plan plan) {
         return planRepo.save(plan);
+    }
+
+    public List<Plan> getPlansForUser(String email) {
+        Optional<User> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found: " + email);
+        }
+        User user = userOpt.get();
+        return planRepo.findByMemberId(user.getId());
     }
     // Update existing plan
     public Optional<Plan> updatePlan(UUID id, Plan newData) {
