@@ -39,7 +39,7 @@ function App() {
   const [showAll, setShowAll] = useState<boolean>(false);
 
   return (
-    <Container sx={{ bgcolor: 'darkgrey', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Container sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Router>
         <Routes>
           <Route element={<Layout showAll={showAll} setShowAll={setShowAll} />}>
